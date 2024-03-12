@@ -33,12 +33,21 @@ pipeline {
             }
         }
 
-        stage('Docker Build') {
+        stage('Docker Login') {
             steps {
                script {
                    
                     sh 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin'
-                    // Building and pushing the Docker image
+  
+                }
+            }
+        }
+        
+         stage('Docker Build') {
+            steps {
+               script {
+                   
+               
                     sh "docker build -t ${IMAGE_NAME} ."
                     sh "docker push ${IMAGE_NAME}"
                 }
