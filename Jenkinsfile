@@ -13,22 +13,7 @@ pipeline {
     }
 
     stages {
-                  stage('Docker Login1111') {
-            steps {
-               script {
-                   
-                    
-                   withCredentials([usernamePassword(credentialsId: 'dockerhubtoken', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                   
-                    bat "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-
-                       
-                }
-  
-                }
-            }
-        }
-        
+                        
         stage('Checkout') {
             steps {
                 // Get some code from a GitHub repository
@@ -67,8 +52,9 @@ pipeline {
                script {
                    
                     
-                   withCredentials([usernamePassword(credentialsId: 'dockerhubtoken', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    bat 'docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}'
+                  withCredentials([usernamePassword(credentialsId: 'dockerhubtoken', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                   
+                    bat "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
                 }
   
                 }
