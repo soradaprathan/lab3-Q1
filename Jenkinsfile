@@ -9,7 +9,7 @@ pipeline {
 
     environment {
         
-        IMAGE_NAME = 'sorada1111/lab3:latest1'
+        IMAGE_NAME = 'sorada1111/lab3:${BUILD_ID}'
     }
 
     stages {
