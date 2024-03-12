@@ -38,7 +38,7 @@ pipeline {
                script {
                    
                
-                    sh "docker build -t ${IMAGE_NAME} ."
+                    bat "docker build -t ${IMAGE_NAME} ."
                     
                 }
             }
@@ -48,7 +48,7 @@ pipeline {
             steps {
                script {
                    
-                    sh 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin'
+                    bat 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin'
   
                 }
             }
@@ -60,7 +60,7 @@ pipeline {
         stage('Docker Push') {
             steps {
                script {
- sh "docker push ${IMAGE_NAME}"
+ bat "docker push ${IMAGE_NAME}"
                 }
             }
         }
