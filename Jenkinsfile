@@ -8,8 +8,8 @@ pipeline {
     }
 
     environment {
-        DOCKER_CREDENTIALS_ID = 'docker-hub-credentials'
-        IMAGE_NAME = 'your-docker-hub-username/your-image-name:latest'
+        DOCKER_CREDENTIALS = credentials('dockerhubtoken')
+        IMAGE_NAME = 'sorada1111/lab3:latest1'
     }
 
     stages {
@@ -35,7 +35,13 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                echo 'Build_E completed.'
+               script {
+                   
+                    sh 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin'
+                    // Building and pushing the Docker image
+                    sh "docker build -t ${IMAGE_NAME} ."
+                    sh "docker push ${IMAGE_NAME}"
+                }
             }
         }
 
