@@ -33,6 +33,17 @@ pipeline {
             }
         }
 
+        stage('Docker Build') {
+            steps {
+               script {
+                   
+               
+                    sh "docker build -t ${IMAGE_NAME} ."
+                    
+                }
+            }
+        }
+        
         stage('Docker Login') {
             steps {
                script {
@@ -43,26 +54,14 @@ pipeline {
             }
         }
         
-         stage('Docker Build') {
-            steps {
-               script {
-                   
-               
-                    sh "docker build -t ${IMAGE_NAME} ."
-                    sh "docker push ${IMAGE_NAME}"
-                }
-            }
-        }
-
-        stage('Docker Login') {
-            steps {
-                echo 'Build_F completed.'
-            }
-        }
+         
+       
 
         stage('Docker Push') {
             steps {
-                echo 'Build_G completed.'
+               script {
+ sh "docker push ${IMAGE_NAME}"
+                }
             }
         }
     }
