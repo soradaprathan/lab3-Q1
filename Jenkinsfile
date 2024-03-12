@@ -8,7 +8,7 @@ pipeline {
     }
 
     environment {
-        DOCKER_CREDENTIALS = credentials('dockerhubtoken')
+        
         IMAGE_NAME = 'sorada1111/lab3:latest1'
     }
 
@@ -48,7 +48,10 @@ pipeline {
             steps {
                script {
                    
-                    bat 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin'
+                    
+                   withCredentials([usernamePassword(credentialsId: 'dockerhubtoken', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    bat 'docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}'
+                }
   
                 }
             }
