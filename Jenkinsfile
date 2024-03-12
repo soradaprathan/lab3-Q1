@@ -29,6 +29,7 @@ pipeline {
         stage('Code Coverage') {
             steps {
                  bat 'mvn clean verify jacoco:report'
+                 jacoco execPattern: '**/target/jacoco.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java'
             }
         }
 
