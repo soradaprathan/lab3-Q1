@@ -9,7 +9,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo 'Build_A completed.'
+                // Get some code from a GitHub repository
+                git branch: 'main', url: 'https://github.com/soradaprathan/lab3-Q1.git'
             }
         }
 
