@@ -19,7 +19,7 @@ pipeline {
                    
                     
                    withCredentials([usernamePassword(credentialsId: 'dockerhubtoken', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    bat 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                    bat 'docker login -u sorada1111 -p dckr_pat_5oc1fPzn2YWT4m5KnOqOXu1AAI0'
                 }
   
                 }
