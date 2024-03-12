@@ -1,5 +1,11 @@
 pipeline {
     agent any
+    
+     tools {
+
+        maven 'MAVEN3'
+
+    }
 
     environment {
         DOCKER_CREDENTIALS_ID = 'docker-hub-credentials'
@@ -16,13 +22,13 @@ pipeline {
 
         stage('Build Maven Project') {
             steps {
-               echo 'Build_B completed.'
+               bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
 
         stage('Code Coverage') {
             steps {
-                echo 'Build_C completed.'
+                 bat 'mvn clean verify jacoco:report'
             }
         }
 
